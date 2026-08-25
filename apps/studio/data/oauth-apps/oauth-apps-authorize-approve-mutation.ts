@@ -1,6 +1,10 @@
 import { useMutation } from '@tanstack/react-query'
 
-import { getMockOAuthAppsAuthorizeGrant, getMockOAuthAppsAuthorizeRedirect } from './mocks'
+import {
+  getMockOAuthAppsAuthorizeGrant,
+  getMockOAuthAppsAuthorizeRedirect,
+  USE_MOCKS,
+} from './mocks'
 import type { OAuthAppsAuthorizeOrganizationProject } from './oauth-apps-authorize-organization-projects-query'
 import type { OAuthScopeGroup } from './types'
 import type { ResponseError, UseCustomMutationOptions } from '@/types'
@@ -31,6 +35,7 @@ export async function approveOAuthAppsAuthorize({
 }: OAuthAppsAuthorizeApproveVariables) {
   if (!id) throw new Error('Authorization request id is required')
   if (!slug) throw new Error('Organization slug is required')
+  if (!USE_MOCKS) throw new Error('OAuth app authorization approval is not yet implemented')
 
   await new Promise((resolve) => setTimeout(resolve, 300))
   const { url } = getMockOAuthAppsAuthorizeRedirect(id, { approved: true })
